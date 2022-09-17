@@ -8,7 +8,7 @@ public class WeatherAPIScript : MonoBehaviour
     public GameObject weatherTextObject;
         // add your personal API key after APPID= and before &units=
        string url = "https://api.openweathermap.org/data/2.5/weather?lat=41.88&lon=-87.6&APPID=e24dd8fc0357818bb206e24af6eec873&units=imperial";
-
+       string url2 = "https://api.openweathermap.org/data/2.5/weather?lat=34.052&lon=-118.244&APPID=e24dd8fc0357818bb206e24af6eec873&units=imperial";
    
     void Start()
     {
@@ -20,8 +20,11 @@ public class WeatherAPIScript : MonoBehaviour
 
    void GetDataFromWeb()
    {
-
-       StartCoroutine(GetRequest(url));
+        if (gameObject.name == "TempText") {
+            StartCoroutine(GetRequest(url));
+        } else {
+            StartCoroutine(GetRequest(url2));
+        }
    }
 
     IEnumerator GetRequest(string uri)
