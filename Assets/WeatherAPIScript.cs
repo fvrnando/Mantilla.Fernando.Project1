@@ -57,8 +57,14 @@ public class WeatherAPIScript : MonoBehaviour
                 int endConditions = webRequest.downloadHandler.text.IndexOf(",",startConditions);
                 string conditions = webRequest.downloadHandler.text.Substring(startConditions+7, (endConditions-startConditions-8));
                 //Debug.Log(conditions);
-
-                weatherTextObject.GetComponent<TextMeshPro>().text = "" + easyTempF.ToString() + "°F\n" + conditions;
+                if (gameObject.name == "TempText") {
+                    weatherTextObject.GetComponent<TextMeshPro>().text = "" + easyTempF.ToString() + "°F\n" + conditions;
+                } else {
+                    easyTempF = easyTempF - 32;
+                    double TempD = easyTempF * 0.556;
+                    int lastTemp = (int)TempD;
+                    weatherTextObject.GetComponent<TextMeshPro>().text = "" + lastTemp.ToString() + "°C\n" + conditions;
+                }
             }
         }
     }
